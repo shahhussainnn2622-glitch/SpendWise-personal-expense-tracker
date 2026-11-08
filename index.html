@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A simple personal expense tracker.">
+  <title>SpendWise | Personal Expense Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="SpendWise home">
+        <span class="brand-mark">S</span>
+        <span>SpendWise</span>
+      </a>
+      <div class="side-label">MENU</div>
+      <a class="nav-link active" href="#dashboard"><span>▦</span> Dashboard</a>
+      <a class="nav-link" href="#transactions"><span>↕</span> Transactions</a>
+      <div class="sidebar-note">
+        <div class="note-icon">✦</div>
+        <strong>Small steps add up.</strong>
+        <p>Keep track of your spending and make every rupee count.</p>
+      </div>
+      <div class="sidebar-footer">PERSONAL FINANCE TOOL</div>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">YOUR MONEY, MADE CLEAR</p>
+          <h1>Dashboard</h1>
+          <p class="subheading">A simple overview of your personal spending.</p>
+        </div>
+        <div class="today-chip"><span class="online-dot"></span><span id="today-date">Today</span></div>
+      </header>
+
+      <section class="stats-grid" aria-label="Expense summary">
+        <article class="stat-card total-card">
+          <div class="stat-top"><span>Total expenses</span><span class="stat-icon">↗</span></div>
+          <div class="stat-value" id="total-expenses">Rs 0</div>
+          <div class="stat-foot">All recorded expenses</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span>This month</span><span class="stat-icon soft-purple">▣</span></div>
+          <div class="stat-value" id="month-expenses">Rs 0</div>
+          <div class="stat-foot">Spent in the current month</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span>Transactions</span><span class="stat-icon soft-green">≡</span></div>
+          <div class="stat-value" id="transaction-count">0</div>
+          <div class="stat-foot">Expenses you have added</div>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel add-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">ADD A RECORD</p>
+              <h2>New expense</h2>
+            </div>
+            <span class="plus-badge">＋</span>
+          </div>
+          <form id="expense-form">
+            <label for="expense-title">Expense name</label>
+            <input id="expense-title" name="title" type="text" placeholder="e.g. Lunch, groceries" maxlength="45" required>
+
+            <div class="form-row">
+              <div>
+                <label for="expense-amount">Amount (PKR)</label>
+                <input id="expense-amount" name="amount" type="number" min="1" step="0.01" placeholder="e.g. 850" required>
+              </div>
+              <div>
+                <label for="expense-date">Date</label>
+                <input id="expense-date" name="date" type="date" required>
+              </div>
+            </div>
+
+            <label for="expense-category">Category</label>
+            <select id="expense-category" name="category" required>
+              <option value="Food">🍽️ Food</option>
+              <option value="Transport">🚕 Transport</option>
+              <option value="Shopping">🛍️ Shopping</option>
+              <option value="Bills">💡 Bills</option>
+              <option value="Education">📚 Education</option>
+              <option value="Health">🩺 Health</option>
+              <option value="Other">✦ Other</option>
+            </select>
+            <button class="primary-button" type="submit">＋ Add expense</button>
+            <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+          </form>
+        </article>
+
+        <article class="panel overview-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">SPENDING BREAKDOWN</p>
+              <h2>By category</h2>
+            </div>
+            <span class="chart-badge">◔</span>
+          </div>
+          <div id="category-chart" class="category-chart">
+            <div class="empty-chart">Add an expense to see your spending breakdown.</div>
+          </div>
+          <div id="category-legend" class="category-legend"></div>
+        </article>
+      </section>
+
+      <section class="panel transactions-panel" id="transactions">
+        <div class="transactions-heading">
+          <div>
+            <p class="eyebrow">YOUR SPENDING HISTORY</p>
+            <h2>Recent transactions</h2>
+          </div>
+          <div class="transaction-actions">
+            <select id="category-filter" aria-label="Filter transactions by category">
+              <option value="All">All categories</option>
+              <option value="Food">Food</option>
+              <option value="Transport">Transport</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Bills">Bills</option>
+              <option value="Education">Education</option>
+              <option value="Health">Health</option>
+              <option value="Other">Other</option>
+            </select>
+            <button class="outline-button" id="export-button" type="button">↓ Export CSV</button>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>EXPENSE</th><th>CATEGORY</th><th>DATE</th><th class="amount-heading">AMOUNT</th><th></th></tr>
+            </thead>
+            <tbody id="expense-list">
+              <tr><td colspan="5" class="empty-row">No expenses yet. Add your first expense above.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-footer"><span id="showing-count">Showing 0 transactions</span><span>Your data is saved in this browser.</span></div>
+      </section>
+
+      <footer class="page-footer">Made for smarter everyday spending <span>✦</span></footer>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
